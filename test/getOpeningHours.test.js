@@ -30,5 +30,6 @@ describe('Testando dias diferentes', () => {
     expect(() => getOpeningHours('Monday', 'E1:30-AM')).toThrow();
     expect(() => getOpeningHours('Monday', '13:30-AM')).toThrow();
     expect(() => getOpeningHours('Monday', '24:88-AM')).toThrowError();
+    expect(() => getOpeningHours('Thursday', '12:88-AM')).toThrowError();
   });
 });
