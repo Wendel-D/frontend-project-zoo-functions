@@ -34,4 +34,3 @@ const handlerElephants = (param) => {
 };
 
 module.exports = handlerElephants;
-// q isso
