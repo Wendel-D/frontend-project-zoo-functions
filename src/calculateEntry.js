@@ -1,40 +1,27 @@
 const data = require('../data/zoo_data');
-const { name } = require('faker/locale/pt_BR'); // APAGAR DEPOIS
-
-const entrants = [
-  { name: name.findName(), age: 5 },
-  { name: name.findName(), age: 5 },
-  { name: name.findName(), age: 5 },
-  { name: name.findName(), age: 18 },
-  { name: name.findName(), age: 18 },
-  { name: name.findName(), age: 50 },
-];
 
 function countEntrants(entrants) {
-  const entradas = entrants.reduce((acumulador, valorAtual) => {
-    if(valorAtual.age < 18){
-      acumulador.child++;
+  const entradas = entrants.reduce((acc, valorAtual) => {
+    if (valorAtual.age < 18) {
+      acc.child += 1;
     } else if (valorAtual.age >= 50) {
-      acumulador.senior++
-    }else {
-      acumulador.adult++
+      acc.senior += 1;
+    } else {
+      acc.adult += 1;
     }
-    return acumulador;
-  }, {adult: 0, child: 0, senior: 0})
+    return acc;
+  }, { adult: 0, child: 0, senior: 0 });
   return entradas;
 }
 
 function calculateEntry(entrants) {
-  if ( entrants === undefined || Object.keys(entrants).length === 0 ) {
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
   const preco = data.prices;
-  const { child,  adult, senior }  = countEntrants(entrants);
+  const { child, adult, senior } = countEntrants(entrants);
   const valorTotal = (child * preco.child) + (adult * preco.adult) + (senior * preco.senior);
   return valorTotal;
 }
-
-console.log(countEntrants(entrants));
-console.log(calculateEntry());
 
 module.exports = { calculateEntry, countEntrants };
