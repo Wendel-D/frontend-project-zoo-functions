@@ -11,15 +11,30 @@ const entrants = [
 ];
 
 function countEntrants(entrants) {
-  entrants.reduce((acumulador, valorAtual) => {
-    ['adult'] = valorAtual.age;
-    return ;
-  }, {})
+  const entradas = entrants.reduce((acumulador, valorAtual) => {
+    if(valorAtual.age < 18){
+      acumulador.child++;
+    } else if (valorAtual.age >= 50) {
+      acumulador.senior++
+    }else {
+      acumulador.adult++
+    }
+    return acumulador;
+  }, {adult: 0, child: 0, senior: 0})
+  return entradas;
 }
 
-// function calculateEntry(entrants) {
-  
-// }
+function calculateEntry(entrants) {
+  if ( entrants === undefined || Object.keys(entrants).length === 0 ) {
+    return 0;
+  }
+  const preco = data.prices;
+  const { child,  adult, senior }  = countEntrants(entrants);
+  const valorTotal = (child * preco.child) + (adult * preco.adult) + (senior * preco.senior);
+  return valorTotal;
+}
 
 console.log(countEntrants(entrants));
-// module.exports = { calculateEntry, countEntrants };
+console.log(calculateEntry());
+
+module.exports = { calculateEntry, countEntrants };
